@@ -3,6 +3,7 @@ import com.opencsv.CSVReader;
 import java.io.File;
 import java.io.FileReader;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 
 /**
@@ -13,16 +14,15 @@ public class DataStoreReader {
     ArrayList<DataStoreItem> dataStoreItems;
     CSVReader reader;
     File dbFile;
-    String DB_FILE_NAME = "dbFile";
     char SEPERATOR = '|';
     char QUOTE = '"';
-    String[] select;
-    String[] filters;
-    String[] order;
+    String[] filterColumns;
+    String[] orderColumns;
     DataStoreFilter dataStoreFilter;
+    DataStoreItemSort dataStoreItemSort;
 
-    public DataStoreReader(String[] select, String[] filters, String[] order) throws Exception {
-        dbFile = new File(DB_FILE_NAME);
+    public DataStoreReader(String[] filterColumns, String[] orderColumns) throws Exception {
+        dbFile = new File(DataStoreFilenames.DB_FILE_NAME.getValue());
         reader = new CSVReader(new FileReader(dbFile), SEPERATOR, QUOTE);
         dataStoreItems = new ArrayList<>();
 
@@ -30,13 +30,13 @@ public class DataStoreReader {
             dbFile.createNewFile();
         }
 
-        this.select = select;
-        this.filters = filters;
-        this.order = order;
-        this.dataStoreFilter = new DataStoreFilter(filters);
+        this.filterColumns = filterColumns;
+        this.orderColumns = orderColumns;
+        this.dataStoreFilter = new DataStoreFilter(this.filterColumns);
+        this.dataStoreItemSort = new DataStoreItemSort(this.orderColumns);
     }
 
-    public ArrayList<DataStoreItem> query() throws Exception{
+    public ArrayList<DataStoreItem> executeQuery() throws Exception{
 
         Iterator<String[]> it = reader.iterator();
         DataStoreItem dataStoreItem = null;
@@ -51,41 +51,7 @@ public class DataStoreReader {
             }
         }
 
+        Collections.sort(dataStoreItems, dataStoreItemSort);
         return dataStoreItems;
-    }
-
-    public ArrayList<DataStoreItem> orderByStb() {
-
-        return null;
-    }
-
-    public ArrayList<DataStoreItem> orderByTitle() {
-
-        return null;
-    }
-
-    public ArrayList<DataStoreItem> orderByProvider() {
-
-        return null;
-    }
-
-    public ArrayList<DataStoreItem> orderByDate() {
-
-        return null;
-    }
-
-    public ArrayList<DataStoreItem> orderByRev() {
-
-        return null;
-    }
-
-    public ArrayList<DataStoreItem> orderByViewTime() {
-
-        return null;
-    }
-
-    public ArrayList<DataStoreItem> select(String[] select) {
-
-        return null;
     }
 }

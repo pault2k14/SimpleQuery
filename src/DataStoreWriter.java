@@ -15,15 +15,13 @@ public class DataStoreWriter {
     CSVWriter writer;
     File dbFile;
     File tempFile;
-    String TEMP_FILE_NAME = "tempFile";
-    String DB_FILE_NAME = "dbFile";
     char SEPERATOR = '|';
     char QUOTE = '"';
 
     public DataStoreWriter() throws Exception {
 
-        dbFile = new File(DB_FILE_NAME);
-        tempFile = new File(TEMP_FILE_NAME);
+        dbFile = new File(DataStoreFilenames.DB_FILE_NAME.getValue());
+        tempFile = new File(DataStoreFilenames.TEMP_FILE_NAME.getValue());
 
         if(!dbFile.exists()) {
             dbFile.createNewFile();
@@ -36,8 +34,8 @@ public class DataStoreWriter {
     }
 
     public void write(DataStoreItem item) throws Exception {
-        dbFile = new File(DB_FILE_NAME);
-        tempFile = new File(TEMP_FILE_NAME);
+        dbFile = new File(DataStoreFilenames.DB_FILE_NAME.getValue());
+        tempFile = new File(DataStoreFilenames.TEMP_FILE_NAME.getValue());
         reader = new CSVReader(new FileReader(dbFile), SEPERATOR, QUOTE);
         writer = new CSVWriter(new FileWriter(tempFile), SEPERATOR, QUOTE);
         boolean written = false;
@@ -68,8 +66,8 @@ public class DataStoreWriter {
         writer.close();
         reader.close();
 
-        File dbFile = new File(DB_FILE_NAME);
-        File tempFile = new File(TEMP_FILE_NAME);
+        File dbFile = new File(DataStoreFilenames.DB_FILE_NAME.getValue());
+        File tempFile = new File(DataStoreFilenames.TEMP_FILE_NAME.getValue());
 
         if(dbFile.exists() && tempFile.exists()) {
             dbFile.delete();

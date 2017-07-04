@@ -17,14 +17,21 @@ public class QueryRunner {
             dataStoreWriter.write(item);
         }
         */
+        // "DATE=2014-04-01"
 
-        DataStoreReader dataStoreReader = new DataStoreReader(new String[]{"STB", "TITLE"},
-                new String[]{"DATE=2014-04-01"}, new String[]{"DATE"});
-        ArrayList<DataStoreItem> dataStoreItems = dataStoreReader.query();
+
+        DataStoreReader dataStoreReader = new DataStoreReader(
+                new String[]{"DATE!=2014-04-02"}, new String[]{"TITLE", "DATE"});
+        ArrayList<DataStoreItem> dataStoreItems = dataStoreReader.executeQuery();
+        DataStoreItemStringBuilder dataStoreItemStringBuilder =
+                new DataStoreItemStringBuilder((new String[]{"STB", "TITLE", "PROVIDER", "DATE",
+                "REV", "VIEW_TIME"}));
 
         for(DataStoreItem dataStoreItem : dataStoreItems) {
-            System.out.println(dataStoreItem);
+            String line = dataStoreItemStringBuilder.buildString(dataStoreItem);
+            System.out.println(line);
         }
+
 
 
     }

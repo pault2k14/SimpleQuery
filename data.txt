@@ -1,7 +1,9 @@
 STB|TITLE|PROVIDER|DATE|REV|VIEW_TIME
-stb1|the matrix|warner bros|2014-04-01|4.00|1:30
+stb1|the matrix|warner bros|2015-05-01|4.00|1:30
 stb1|unbreakable|buena vista|2014-04-03|6.00|2:05
 stb2|the hobbit|warner bros|2014-04-02|8.00|2:45
-stb3|the matrix|warner bros|2014-04-02|4.00|1:05
-stb3|deadpool|20th Century Fox|2016-11-21|4.00|1:48
-stb1|The Revenant|20th Century Fox|2016-04-01|4.00|12:36
+stb3|the matrix|warner bros|2014-04-02|2.00|1:05
+stb2|the matrix|warner bros|2014-05-01|4.00|1:30
+stb3|deadpool|20th century fox|2016-11-21|4.00|1:48
+stb2|blair witch|artisan entertainment|2015-04-01|4.00|2:16
+stb1|the revenant|20th century fox|2016-04-01|4.00|12:36

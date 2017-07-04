@@ -86,24 +86,6 @@ public class DataStoreItem {
         this.pk = stb + title + date;
     }
 
-    public static void main(String... aArgs){
-        BigDecimal doublePayment = new BigDecimal("1099.3222");
-        NumberFormat n = NumberFormat.getCurrencyInstance(Locale.US);
-        String s = n.format(doublePayment );
-        System.out.println(s);
-        NumberFormat format = NumberFormat.getCurrencyInstance();
-        Number number = null;
-
-        try {
-            number = format.parse(s);
-        }
-        catch (ParseException e) {
-
-        }
-
-        System.out.println(number.toString());
-    }
-
     public String getStb() {
         return this.stb;
     }
@@ -193,7 +175,6 @@ public class DataStoreItem {
     public void setPk(String stb, String title, String date) {
         this.pk = stb + title + date;
     }
-
 
     @Override
     public String toString() {
