@@ -1,3 +1,5 @@
+package me.pthompson.SimpleQuery;
+
 import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -6,7 +8,8 @@ import java.time.format.DateTimeParseException;
 import java.util.Date;
 
 /**
- * Created by Paul on 7/3/2017.
+ * Filters for used against querying DataStoreItems from the
+ * DataStore database.
  */
 public class DataStoreFilter {
 
@@ -28,6 +31,10 @@ public class DataStoreFilter {
             this.parsedFilters[i] = parseFilter(this.filters[i]);
         }
 
+    }
+
+    public String[][] getParsedFilters() {
+        return this.parsedFilters;
     }
 
     public boolean match(DataStoreItem dataStoreItem) throws Exception {
@@ -269,20 +276,20 @@ public class DataStoreFilter {
 
         String[] splitFields;
 
-        if(filter.contains("<=")){
-            splitFields = filter.split("<=");
+        if(filter.contains(":lte:")){
+            splitFields = filter.split(":lte:");
             return new String[]{splitFields[0], splitFields[1], LESS_THEN_OR_EQUAL};
         }
-        else if(filter.contains(">=")){
-            splitFields = filter.split(">=");
+        else if(filter.contains(":gte:")){
+            splitFields = filter.split(":gte:");
             return new String[]{splitFields[0], splitFields[1], GREATER_THEN_OR_EQUAL};
         }
-        else if(filter.contains("<")){
-            splitFields = filter.split("<");
+        else if(filter.contains(":lt:")){
+            splitFields = filter.split(":lt:");
             return new String[]{splitFields[0], splitFields[1], LESS_THEN};
         }
-        else if(filter.contains(">")){
-            splitFields = filter.split(">");
+        else if(filter.contains(":gt:")){
+            splitFields = filter.split(":gt:");
             return new String[]{splitFields[0], splitFields[1], GREATER_THEN};
         }
         else if(filter.contains("!=")){

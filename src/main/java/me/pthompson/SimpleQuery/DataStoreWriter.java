@@ -1,3 +1,5 @@
+package me.pthompson.SimpleQuery;
+
 import com.opencsv.CSVReader;
 import com.opencsv.CSVWriter;
 
@@ -7,16 +9,16 @@ import java.io.FileWriter;
 import java.util.Iterator;
 
 /**
- * Created by Paul.Thompson on 6/29/2017.
+ * Writes DataStoreItems to the DataStore database.
  */
 public class DataStoreWriter {
 
-    CSVReader reader;
-    CSVWriter writer;
-    File dbFile;
-    File tempFile;
-    char SEPERATOR = '|';
-    char QUOTE = '"';
+    private CSVReader reader;
+    private CSVWriter writer;
+    private File dbFile;
+    private File tempFile;
+    private char SEPERATOR = '|';
+    private char QUOTE = '"';
 
     public DataStoreWriter() throws Exception {
 
@@ -41,8 +43,6 @@ public class DataStoreWriter {
         boolean written = false;
 
         for (Iterator<String[]> itemIterator = reader.iterator(); itemIterator.hasNext(); ) {
-
-            item.getViewTimeString();
 
             String[] itemStringArray = itemIterator.next();
             DataStoreItem dbDataStoreItem = new DataStoreItem(itemStringArray[0], itemStringArray[1],

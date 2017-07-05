@@ -1,19 +1,20 @@
+package me.pthompson.SimpleQuery;
+
 import org.apache.commons.lang3.builder.CompareToBuilder;
 
 import java.util.Comparator;
 
 /**
- * Created by Paul on 7/3/2017.
+ * Custom comparison of DataStoreItem
  */
 public class DataStoreItemSort implements Comparator<DataStoreItem> {
 
-    String[] orderColumns;
+    private String[] orderColumns;
 
-    DataStoreItemSort(String[] orderColumns) {
+    public DataStoreItemSort(String[] orderColumns) {
         this.orderColumns = orderColumns;
     }
 
-    @Override
     public int compare(DataStoreItem a, DataStoreItem b) {
 
         CompareToBuilder compareToBuilder = new CompareToBuilder();

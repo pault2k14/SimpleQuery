@@ -1,3 +1,5 @@
+package me.pthompson.SimpleQuery;
+
 import com.opencsv.CSVReader;
 
 import java.io.File;
@@ -7,28 +9,31 @@ import java.util.Collections;
 import java.util.Iterator;
 
 /**
- * Created by Paul.Thompson on 6/29/2017.
+ * Builds queries against the DataStore database, and
+ * reads DataStoreItems from the DataStore database.
  */
 public class DataStoreReader {
 
-    ArrayList<DataStoreItem> dataStoreItems;
-    CSVReader reader;
-    File dbFile;
-    char SEPERATOR = '|';
-    char QUOTE = '"';
-    String[] filterColumns;
-    String[] orderColumns;
-    DataStoreFilter dataStoreFilter;
-    DataStoreItemSort dataStoreItemSort;
+    private ArrayList<DataStoreItem> dataStoreItems;
+    private CSVReader reader;
+    private File dbFile;
+    private char SEPERATOR = '|';
+    private char QUOTE = '"';
+    private String[] filterColumns;
+    private String[] orderColumns;
+    private DataStoreFilter dataStoreFilter;
+    private DataStoreItemSort dataStoreItemSort;
 
     public DataStoreReader(String[] filterColumns, String[] orderColumns) throws Exception {
+
         dbFile = new File(DataStoreFilenames.DB_FILE_NAME.getValue());
-        reader = new CSVReader(new FileReader(dbFile), SEPERATOR, QUOTE);
-        dataStoreItems = new ArrayList<>();
 
         if(!dbFile.exists()) {
             dbFile.createNewFile();
         }
+
+        reader = new CSVReader(new FileReader(dbFile), SEPERATOR, QUOTE);
+        dataStoreItems = new ArrayList<DataStoreItem>();
 
         this.filterColumns = filterColumns;
         this.orderColumns = orderColumns;

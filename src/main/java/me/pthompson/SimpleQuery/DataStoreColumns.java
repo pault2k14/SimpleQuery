@@ -1,5 +1,7 @@
+package me.pthompson.SimpleQuery;
+
 /**
- * Created by Paul on 7/3/2017.
+ * ENUMS for the DataStore column names.
  */
 public enum DataStoreColumns {
     STB("STB"),

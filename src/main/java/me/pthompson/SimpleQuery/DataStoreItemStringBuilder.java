@@ -1,11 +1,13 @@
+package me.pthompson.SimpleQuery;
+
 /**
- * Created by Paul on 7/4/2017.
+ * Builds strings for queries of DataStoreItems
  */
 public class DataStoreItemStringBuilder {
 
     private String[] selectColumns;
 
-    DataStoreItemStringBuilder(String[] selectColumns) {
+    public DataStoreItemStringBuilder(String[] selectColumns) {
         this.selectColumns = selectColumns;
     }
 

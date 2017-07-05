@@ -1,30 +1,24 @@
-import java.beans.beancontext.BeanContext;
+package me.pthompson.SimpleQuery;
+
 import java.math.BigDecimal;
-import java.text.DateFormat;
-import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.Duration;
-import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.time.temporal.TemporalUnit;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Locale;
+import java.util.*;
 import java.lang.*;
 
 /**
- * Created by Paul.Thompson on 6/29/2017.
+ * Class representing the simple database columns.
  */
 public class DataStoreItem {
 
     private String stb;
-    private int stbMaxLength = 64;
+    private int STB_MAX_LENGTH = 64;
     private String title;
-    private int titleMaxLength = 64;
+    private int TITLE_MAX_LENGTH = 64;
     private String provider;
-    private int providerMaxLength = 64;
+    private int PROVIDER_MAX_LENGTH = 64;
     private Date date;
     private BigDecimal rev;
     private Duration viewTime;
@@ -39,18 +33,18 @@ public class DataStoreItem {
                          String date, String rev, String viewTime) throws Exception {
 
         this.stb = stb;
-        if (stb.length() > stbMaxLength) {
-            throw new Exception("STB exceeds " + stbMaxLength + " characters: " + stb);
+        if (stb.length() > STB_MAX_LENGTH) {
+            throw new Exception("STB exceeds " + STB_MAX_LENGTH + " characters: " + stb);
         }
 
         this.title = title;
-        if (title.length() > titleMaxLength) {
-            throw new Exception("TITLE exceeds " + titleMaxLength + " characters: " + title);
+        if (title.length() > TITLE_MAX_LENGTH) {
+            throw new Exception("TITLE exceeds " + TITLE_MAX_LENGTH + " characters: " + title);
         }
 
         this.provider = provider;
-        if (provider.length() > providerMaxLength) {
-            throw new Exception("PROVIDER string exceeds " + providerMaxLength + " characters: " + provider);
+        if (provider.length() > PROVIDER_MAX_LENGTH) {
+            throw new Exception("PROVIDER string exceeds " + PROVIDER_MAX_LENGTH + " characters: " + provider);
         }
 
         sdfm = new SimpleDateFormat("yyyy-MM-dd");
@@ -92,8 +86,8 @@ public class DataStoreItem {
 
     public void setStb(String stb) throws Exception {
         this.stb = stb;
-        if (stb.length() > stbMaxLength) {
-            throw new Exception("STB exceeds " + stbMaxLength + " characters: " + stb);
+        if (stb.length() > STB_MAX_LENGTH) {
+            throw new Exception("STB exceeds " + STB_MAX_LENGTH + " characters: " + stb);
         }
     }
 
@@ -103,8 +97,8 @@ public class DataStoreItem {
 
     public void setTitle(String title) throws Exception {
         this.title = title;
-        if (title.length() > titleMaxLength) {
-            throw new Exception("TITLE exceeds " + titleMaxLength + " characters: " + title);
+        if (title.length() > TITLE_MAX_LENGTH) {
+            throw new Exception("TITLE exceeds " + TITLE_MAX_LENGTH + " characters: " + title);
         }
     }
 
@@ -114,8 +108,8 @@ public class DataStoreItem {
 
     public void setProvider(String provider) throws Exception {
         this.provider = provider;
-        if (provider.length() > providerMaxLength) {
-            throw new Exception("PROVIDER string exceeds " + providerMaxLength + " characters: " + provider);
+        if (provider.length() > PROVIDER_MAX_LENGTH) {
+            throw new Exception("PROVIDER string exceeds " + PROVIDER_MAX_LENGTH + " characters: " + provider);
         }
     }
 
@@ -175,6 +169,30 @@ public class DataStoreItem {
     public void setPk(String stb, String title, String date) {
         this.pk = stb + title + date;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == this) return true;
+
+        if (!(o instanceof DataStoreItem)) {
+            return false;
+        }
+
+        DataStoreItem item = (DataStoreItem) o;
+
+        return Objects.equals(stb, item.stb) &&
+                Objects.equals(title, item.title) &&
+                Objects.equals(provider, item.provider) &&
+                Objects.equals(date, item.date) &&
+                Objects.equals(rev, item.rev) &&
+                Objects.equals(viewTime, item.viewTime);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(stb, title, provider, date, rev, viewTime);
+    }
+
 
     @Override
     public String toString() {
