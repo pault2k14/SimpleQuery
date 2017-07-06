@@ -4,6 +4,9 @@ import org.junit.Before;
 import org.junit.Test;
 import java.util.ArrayList;
 
+/**
+ *  Provides basic testing of the DataStoreFilter class.
+ */
 public class DataStoreFilterTest {
 
     private DataStoreFilter dataStoreFilter;

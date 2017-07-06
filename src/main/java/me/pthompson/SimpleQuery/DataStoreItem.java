@@ -32,52 +32,13 @@ public class DataStoreItem {
     public DataStoreItem(String stb, String title, String provider,
                          String date, String rev, String viewTime) throws Exception {
 
-        this.stb = stb;
-        if (stb.length() > STB_MAX_LENGTH) {
-            throw new Exception("STB exceeds " + STB_MAX_LENGTH + " characters: " + stb);
-        }
-
-        this.title = title;
-        if (title.length() > TITLE_MAX_LENGTH) {
-            throw new Exception("TITLE exceeds " + TITLE_MAX_LENGTH + " characters: " + title);
-        }
-
-        this.provider = provider;
-        if (provider.length() > PROVIDER_MAX_LENGTH) {
-            throw new Exception("PROVIDER string exceeds " + PROVIDER_MAX_LENGTH + " characters: " + provider);
-        }
-
-        sdfm = new SimpleDateFormat("yyyy-MM-dd");
-        try {
-            this.date = sdfm.parse(date);
-        } catch (ParseException e) {
-            throw new Exception("Unable to parse DATE string: " + date);
-        }
-
-        this.rev = new BigDecimal(rev);
-
-        String[] viewTimeFields = viewTime.split(":");
-
-        if(viewTimeFields.length == 2) {
-            try {
-                this.viewTime = Duration.parse(String.format("PT%sH%sM", viewTimeFields[0], viewTimeFields[1]));
-            }
-            catch (DateTimeParseException e) {
-                throw new Exception("Unable to parse VIEW_TIME string: " + viewTime);
-            }
-        }
-        else {
-            try {
-                this.viewTime = Duration.parse(viewTime);
-            }
-            catch (DateTimeParseException e) {
-                throw new Exception("Unable to parse VIEW_TIME string: " + viewTime);
-            }
-        }
-
-
-
-        this.pk = stb + title + date;
+        setStb(stb);
+        setTitle(title);
+        setProvider(provider);
+        setDate(date);
+        setViewTime(viewTime);
+        setRev(rev);
+        setPk(stb, title, date);
     }
 
     public String getStb() {
@@ -122,7 +83,7 @@ public class DataStoreItem {
     }
 
     public void setDate(String date) throws Exception {
-        SimpleDateFormat sdfm = new SimpleDateFormat("yyyy-MM-dd");
+        sdfm = new SimpleDateFormat("yyyy-MM-dd");
         try {
             this.date = sdfm.parse(date);
         } catch (ParseException e) {
@@ -154,11 +115,22 @@ public class DataStoreItem {
 
     public void setViewTime(String viewTime) throws Exception {
         String[] viewTimeFields = viewTime.split(":");
-        try {
-            this.viewTime = Duration.parse(String.format("PT%sH%sM", viewTimeFields[0], viewTimeFields[1]));
+
+        if(viewTimeFields.length == 2) {
+            try {
+                this.viewTime = Duration.parse(String.format("PT%sH%sM", viewTimeFields[0], viewTimeFields[1]));
+            }
+            catch (DateTimeParseException e) {
+                throw new Exception("Unable to parse VIEW_TIME string: " + viewTime);
+            }
         }
-        catch (DateTimeParseException e) {
-            throw new Exception("Unable to parse VIEW_TIME string: " + viewTime);
+        else {
+            try {
+                this.viewTime = Duration.parse(viewTime);
+            }
+            catch (DateTimeParseException e) {
+                throw new Exception("Unable to parse VIEW_TIME string: " + viewTime);
+            }
         }
     }
 
