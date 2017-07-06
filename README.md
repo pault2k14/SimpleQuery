@@ -17,3 +17,10 @@ To perform query
    - output: 
              the hobbit,2014-04-02
              the matrix,2014-04-02
+             
+Detailed command line options
+-l datafile : Loads a datafile into the database.
+-s COLUMN1,COLUMN2,COLUMN3 (any number of columns) : Sets the columns to display in the query result.
+-o COLUMN1,COLUMN2,COLUMN3 (any number of columns) : Sets the ordering of the query results.
+-f COLUMN(operator)VALUE (any number of filters) : Sets filters for the query results.
+   Possible filter operatorss are =, !=, :lt:, :lte:, :gt:, :gte: 
